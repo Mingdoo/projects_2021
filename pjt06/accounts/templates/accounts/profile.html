@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block bd %}
+  <hr>
+  {% if request.user == user %}
+    <h1>{{ user.username }}</h1>
+    <hr>
+    <form action="{% url 'accounts:delete' %}" method='POST' id='delete-form'>
+      {% csrf_token %}
+      <a class="text-decoration-none" onclick="document.querySelector('#delte-form').submit()" href="#">delete</a>
+    </form>
+    <a href="{% url 'accounts:update' %}" class="text-decoration-none">update</a>
+  {% endif %}
+{% endblock bd %}

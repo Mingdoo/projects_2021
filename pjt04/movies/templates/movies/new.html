@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block body %}
+  <form action="{% url 'movies:create' %}" method='POST'>
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="exampleFormControlInput1" class="form-label">Title</label>
+      <input type="text" class="form-control" id="exampleFormControlInput1" name='title'>
+    </div>
+    <div class="mb-3">
+      <label for="exampleFormControlTextarea1" class="form-label">overview</label>
+      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name='overview'></textarea>
+    </div>
+    <div class="mb-3">
+      <label for="exampleFormControlTextarea1" class="form-label">posterpath</label>
+      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name='poster_path'></textarea>
+    </div>
+    <input type="submit" name="" id="">
+  </form>
+{% endblock body %}

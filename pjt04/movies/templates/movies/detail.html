@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block body %}
+  <div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">title : {{ movie.title }}</h5>
+      <hr>
+      <p class="card-text">overview : {{ movie.overview }}</p>
+      <hr>
+      <p class="card-text">poster path : {{ movie.poster_path }}</p>
+      <a href="{% url 'movies:edit' movie.pk %}" class='btn btn-primary'>edit</a>
+      <a href="{% url 'movies:delete' movie.pk %}" class='btn btn-primary'>delete</a>
+    </div>
+  </div>
+{% endblock body %}

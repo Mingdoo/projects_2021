@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="row justify-content-between">
+    <h1 class="col-6 title-font">영화 상세 정보</h1>
+    <div class="col-3 d-flex justify-content-end align-items-center">
+      <form action="{% url 'movies:update' movie.pk %}" method="GET" class="d-inline mx-1">
+        <input type="submit" class="btn btn-success content-font" value="수정">
+      </form>
+      <form action="{% url 'movies:delete' movie.pk %}" method='POST'>
+        {% csrf_token %}
+        <input type="submit" class="btn btn-danger mx-1 content-font" value="삭제" data-bs-toggle="modal" data-bs-target="#deleteModal">
+      </form>
+      
+    </div>
+  </div> <hr>
+  <div class="row">
+    <div class="col-5">
+      <img src="{{ movie.poster_path.url }}" alt="영화 {{ movie.title }}의 포스터" class='w-100'>
+    </div>
+    <div class="col-7 content-font">
+      <h3>영화 제목: {{ movie.title }}</h3>
+      <br>
+      <p>영화 줄거리: {{ movie.overview }}</p>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block body %}
+  {% if search|length != 0 %}
+    {% if movies|length != 0 %}
+      <h5>{{ search }}에 대한 검색 결과는 다음과 같습니다.</h5>
+    {% else %}
+    <h5>{{ search }}에 대한 검색 결과는 존재하지 않습니다.</h5>
+    {% endif %}
+  {% endif %}
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Title</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for movie in movies %}
+        <tr>
+          <th scope="row">{{ movie.pk }}</th>
+          <td><a href="{% url 'movies:detail' movie.pk %}" class='text-decoration-none'>{{ movie.title }}</a></td>
+        </tr>
+      {% endfor %}
+  </table>
+{% endblock body %}
