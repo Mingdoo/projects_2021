@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>HOME</h1>
+
+<ul>
+{% for review in reviews %}
+  <li>
+    {{ review.user }} : 
+    <a href="{% url 'community:detail' review.pk %}">{{ review.title }}</a>
+  </li>
+{% empty %}
+  <li>
+    No reviews.. YET
+  </li>
+{% endfor %}
+
+</ul>
+
+{% endblock content %}

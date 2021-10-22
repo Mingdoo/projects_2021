@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{{ profile.username }}의 profile</h1>
+<h2>Followers: {{ profile.followers.count }}</h2>
+<h2>Followings: {{ profile.followings.count }}</h2>
+<h3>{{ profile.username }}가 쓴 게시글</h3>
+{% for review in profile.review_set.all %}
+  <p><a href="{% url 'community:detail' review.pk %}">{{ review.title }}</a></p>
+{% endfor %}
+{% if request.user.is_authenticated and request.user != profile %}
+<form action="{% url 'accounts:follow' profile.username %}" method="POST">
+  {% csrf_token %}
+  {% if is_following %}
+  <button>UNFOLLOW</button>
+  {% else %}
+  <button>FOLLOW</button>
+  {% endif %}
+</form>
+{% endif %}
+{% endblock content %}
