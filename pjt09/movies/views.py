@@ -38,10 +38,10 @@ def detail(request, movie_pk):
 
 def recommended(request):
     movies = get_list_or_404(Movie)
-    movies1 = Movie.objects.all()[:25]
-    movies2 = Movie.objects.all()[25:50]
-    movies3 = Movie.objects.all()[50:75]
-    movies4 = Movie.objects.all()[75:]
+    movies1 = Movie.objects.all()[:5]
+    movies2 = Movie.objects.all()[5:10]
+    movies3 = Movie.objects.all()[10:15]
+    movies4 = Movie.objects.all()[15:20]
     
     #algorithm
     if request.method == 'GET':
