@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  {% if request.method == 'GET' %}
+    <form action="" method='POST'>
+      {% csrf_token %}
+      <hr>
+      <div>
+        {% for movie in movies1 %}
+          <p>
+            <input type="radio" name="movie1" id="{{ movie.title }}" value="{{ movie.pk }}">
+            <label for="{{ movie.title }}">{{ movie.title }}</label>
+          </p>
+        {% endfor %}
+      </div>
+      <hr>
+      <div>
+        {% for movie in movies2 %}
+          <p>
+            <input type="radio" name="movie2" id="{{ movie.title }}" value="{{ movie.pk }}">
+            <label for="{{ movie.title }}">{{ movie.title }}</label>
+          </p>
+        {% endfor %}
+      </div>
+      <hr>
+      <div>
+        {% for movie in movies3 %}
+          <p>
+            <input type="radio" name="movie3" id="{{ movie.title }}" value="{{ movie.pk }}">
+            <label for="{{ movie.title }}">{{ movie.title }}</label>
+          </p>
+        {% endfor %}
+      </div>
+      <hr>
+      <div>
+        {% for movie in movies4 %}
+          <p>
+            <input type="radio" name="movie4" id="{{ movie.title }}" value="{{ movie.pk }}">
+            <label for="{{ movie.title }}">{{ movie.title }}</label>
+          </p>
+        {% endfor %}
+      </div>
+      <hr>
+      <input type="submit" name="" id="">
+    </form>
+  {% else %}
+    <hr>
+    <h2>추천 목록</h2>
+    <hr>
+    {% for movie in movies %}
+      <p><img src="{{ movie.poster_path }}" alt=""></p>
+      <p>장르 : {{ movie.genres }}</p>
+      <h4><a href="{% url 'movies:detail' movie.pk %}">{{ movie.title }}</a></h4>
+      <h5>평점 : {{ movie.vote_average }}</h5>
+      <hr>
+    {% endfor %}
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Movies</h1>
+  <div id='list'>
+    {% for movie in movies %}
+      <div>
+        <h3>{{ movie.title }}</h3>
+        <p>{{ movie.overview }}</p>
+        <p><a href="{% url 'movies:detail' movie.pk %}">[detail]</a></p>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}
+
+{% block script %}
+  <script>
+    let pageNum = 1
+    document.addEventListener('scroll', () =>{
+      const {clientHeight, scrollHeight, scrollTop} = document.documentElement
+      if (clientHeight + Math.round(scrollTop) === scrollHeight){
+        pageNum += 1
+        axios({
+          method: 'get',
+          headers: {
+            'x-requested-with' : 'XMLHttpRequest'
+          },
+          url: `?page=${pageNum}`,
+        })
+          .then((res) => {
+            const myList = document.querySelector('#list')
+            res.data.forEach((data) => {
+              const newDiv = document.createElement('div')
+              const newHtml = `
+                <h3>${ data.fields.title }</h3>
+                <p>${ data.fields.overview }</p>
+                <p><a href="${data.pk}">[detail]</a></p>
+              `
+              newDiv.innerHTML = newHtml
+              myList.appendChild(newDiv)
+            })
+          })
+      }
+    })
+  </script>
+{% endblock script %}
